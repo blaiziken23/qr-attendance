@@ -1,0 +1,65 @@
+.content {
+  margin-left: 250px;
+  transition: .5s cubic-bezier(0.42, 0, 0, 1.13);
+}
+#displayTime {
+  font-size: 3rem;
+}
+.boxes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+form #value {
+  display: none;
+}
+video {
+  width: 200% !important;
+  border-radius: 10px;
+}
+#scan-qrcode {
+  width: 150px;
+  height: 50px;
+  background: var(--mustardyellow);
+  color: var(--black);
+}
+#dashboard .card {
+  border: 1px solid var(--green);
+}
+#dashboard .card .row .col-md-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--armygreen);
+}
+#dashboard .card .row .col-md-4 i.bi {
+  color: var(--white);
+  font-size: 3.5rem;
+}
+#getday {
+  font-size: .9rem;
+}
+section span i.bi {
+  font-size: 1.3em;
+  margin-right: 10px;
+}
+.navbar .bi-list {
+  font-size: 2rem;
+}
+#add-employee {
+  background: var(--mustardyellow);
+}
+.gridjs-container {
+  width: auto !important;
+}
+.tab-content {
+  background: var(--white);
+}
+.btn-close {
+  color: var(--white) !important;
+}
+
+.gridjs-table {
+  width: 100%;
+}
