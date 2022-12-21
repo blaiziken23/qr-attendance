@@ -40,7 +40,7 @@ body {
   width: 350px;
 }
 .swal2-title {
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
 }
 section {
   background-color: var(--green);
@@ -125,15 +125,12 @@ nav .btn-group button:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 12px;
+  padding: 7px 12px;
   color: var(--white);
 }
 .nav-link span {
   font-size: 14px;
 }
-/* .gridjs-wrapper::-webkit-scrollbar {
-  display: none;
-} */
 .gridjs-wrapper::-webkit-scrollbar, body::-webkit-scrollbar {
   width: 5px;
 }
@@ -141,3 +138,21 @@ nav .btn-group button:focus {
   background: var(--armygreen); 
   /* border-radius: 10px; */
 }
+
+table {
+  text-transform: capitalize;
+}
+
+table td {
+  font-size: .8rem;
+}
+
+#edit-info tbody td {
+  padding: .5rem;
+}
+#edit-info tbody th, #edit-info tbody td {
+  vertical-align: middle;
+}
+/* .gridjs-td-status {
+  background-color: red;
+} */

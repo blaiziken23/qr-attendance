@@ -22,16 +22,15 @@
   $day = date("l");
   $today_date = date("Y-m-d");
 
-
   $attendance = mysqli_query($conn, "SELECT * FROM `employee_attendance` WHERE `date` = '$today_date'"); 
   $schedule_today = mysqli_query($conn, "SELECT * FROM `employee_schedule` WHERE `day` = '$day'");
 
-
+  // echo mysqli_num_rows($attendance);
   if (mysqli_num_rows($attendance) == 0) {
     $set_absent = "INSERT INTO employee_attendance (`status`, `fullname`, `date`, `information_id`)  
                     SELECT 
                       '$absent',
-                      employee_information.firstname,
+                      CONCAT(employee_information.firstname, ' ', employee_information.lastname),
                       '$today_date',
                       employee_information.information_id
                     FROM 
@@ -74,7 +73,7 @@
               Swal.fire({
                 icon: 'info',
                 title: 'You Dont Have Schedule Today!',
-                html: `<p> This means you dont have record schedule today from the database </p>`,
+                html: `<p> You dont have record schedule today </p>`,
                 timer: 3000,
                 showConfirmButton: false,
                 allowOutsideClick: false,
@@ -117,7 +116,7 @@
                     Swal.fire({
                       icon: 'success',
                       title: 'Ontime',
-                      html: `<b class='text-uppercase'> $fullname </b> Successfully Time In`,
+                      html: `<b class='text-capitalize'> $fullname </b> Successfully Time In`,
                       timer: 3000,
                       showConfirmButton: false,
                       allowOutsideClick: false,
@@ -153,7 +152,7 @@
                     Swal.fire({
                       icon: 'success',
                       title: '',
-                      html: `<b class='text-uppercase'> $fullname </b> Successfully Time In`,
+                      html: `<b class='text-capitalize'> $fullname </b> Successfully Time In`,
                       timer: 3000,
                       showConfirmButton: false,
                       allowOutsideClick: false,
@@ -185,7 +184,7 @@
                   Swal.fire({
                     icon: 'success',
                     title: 'Success',
-                    html: `<b class='text-uppercase'> $fullname </b> Successfully Time Out`,
+                    html: `<b class='text-capitalize'> $fullname </b> Time Out`,
                     timer: 3000,
                     showConfirmButton: false,
                     allowOutsideClick: false,
@@ -229,7 +228,7 @@
               icon: 'error',
               title: 'Qrcode Error',
               text: 'Qrcode Not Recognized',
-              timer: '3000',
+              timer: '1500',
               showConfirmButton: false,
               allowOutsideClick: false,
               timerProgressBar: true
@@ -242,6 +241,12 @@
         </script>";
     }
   }
+
+
+
+
+
+
 ?>
 
 
@@ -272,7 +277,7 @@
         <h6 class="card-title mb-0 text-center">Cavite State University General Trias</h6>
       </div>
     </div>
-    <h5 class="text-center text-capitalize mb-3">Welcome <?php echo $rows["position"]; ?></h5>
+    <h5 class="text-center text-capitalize mb-3">Welcome <?php echo $rows["firstname"]; ?></h5>
     <hr>
     <div class="nav flex-column nav-pills w-100" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <button class="nav-link active" href="#dashboard" data-bs-toggle="pill" data-bs-target="#dashboard" type="button">
@@ -281,7 +286,7 @@
           Dashboard
         </span>
       </button>
-      <a class="nav-link" href="#monitor" type="button" data-bs-toggle="collapse" data-bs-target="#sub-monitor">
+      <a class="nav-link" href="#monitor" type="button" data-bs-toggle="collapse" data-bs-target="#sub-monitor" id="monitor-nav">
         <span>
           <i class="bi bi-tv"></i>
           Monitor
@@ -292,7 +297,7 @@
       </a>
       <!-- sub monitor -->
       <div class="collapse" id="sub-monitor">
-        <div class="ms-3 border-start border-3">
+        <div class="ms-3 border-start border-2">
           <button class="nav-link w-100 ms-1" href="#present" data-bs-toggle="pill" data-bs-target="#present" type="button">
             <span class="">
               <i class="bi bi-building-add"></i>
@@ -343,22 +348,10 @@
           Employee
         </span>
       </button>
-      <!-- <button class="nav-link" href="#profile" data-bs-toggle="pill" data-bs-target="#profile" type="button">
-        <span>
-          <i class="bi bi-person"></i>
-          Profile
-        </span>
-      </button> -->
-      <!-- <button class="nav-link" href="#v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button">
-        <span>
-          <i class="bi bi-chat-dots"></i>
-          Messages
-        </span>
-      </button> -->
       <button class="nav-link" href="#attendance" data-bs-toggle="pill" data-bs-target="#attendance" type="button">
         <span>
-          <i class="bi bi-gear"></i>
-          Attendance
+          <i class="bi bi-people"></i>
+          Attendance List
         </span>
       </button>
       <button class="nav-link" href="#report" data-bs-toggle="pill" data-bs-target="#report" type="button">
@@ -382,15 +375,21 @@
             <button class="btn btn-sm dropdown-toggle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="../img/images/default_profile.png" alt="" class="">
             </button>
-            <ul class="dropdown-menu dropdown-menu-md-end">
+            <ul class="dropdown-menu dropdown-menu-md-end p-2 shadow">
               <li><a class="dropdown-item" href="admin.php?#attendance">
-                <i class="bi bi-people"></i>
+                <i class="bi bi-people me-1"></i> 
                 Attendance
               </a> </li>
-              <li><a class="dropdown-item" href="admin.php?#employee">Employee</a></li>
-              <li><a class="dropdown-item" href="admin.php?#schedule">Schedule</a></li>
-              <li><a class="dropdown-item" href="logout.php">
-                <i class="bi bi-box-arrow-right"></i>
+              <li><a class="dropdown-item" href="admin.php?#employee">
+                <i class="bi bi-person-lines-fill me-1"></i> 
+                Employee
+              </a></li>
+              <li><a class="dropdown-item" href="admin.php?#schedule">
+                <i class="bi bi-calendar me-1"></i>  
+                Schedule 
+              </a></li>
+              <li><a class="dropdown-item me-1 bg-danger text-white rounded" href="logout.php">
+                <i class="bi bi-box-arrow-right"></i> 
                 Logout
               </a></li>
             </ul>
@@ -405,8 +404,8 @@
           <div class="d-flex justify-content-end" id="getday"></div>
         </div>
         <button type="button" class="btn shadow-sm" data-bs-toggle="modal" data-bs-target="#qrcode" id="scan-qrcode">
-          <i class="bi bi-qr-code-scan"></i>
-          Scan
+          <i class="bi bi-qr-code-scan fs-5 me-2"></i>
+          SCAN
         </button>
       </div>
       <hr>
@@ -428,7 +427,7 @@
                     </h5>
                     <h5 class="card-text">
                       <?php
-                        $sql = "SELECT * FROM `employee_attendance` WHERE `in_and_out` = '0' OR `in_and_out` = '1' AND  `date` = CURRENT_DATE";
+                        $sql = "SELECT * FROM `employee_attendance` WHERE `date` = CURRENT_DATE AND (in_and_out = '0' OR in_and_out = '1')";
                         $count = mysqli_query($conn, $sql); 
                         echo mysqli_num_rows($count);
                       ?>
@@ -567,36 +566,58 @@
               </div>
             </div>
           </div>
+          <div class="col-lg">
+            <div class="card mb-3 shadow-sm">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <i class="bi bi-person-lines-fill"></i>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      Registered Employee
+                    </h5>
+                    <h5 class="card-text">
+                      <?php
+                        $sql = "SELECT * FROM `employee_information`";
+                        $count = mysqli_query($conn, $sql);
+                        echo mysqli_num_rows($count);
+                      ?>
+                    </h5>
+                    <div class="d-flex justify-content-end">
+                      <a href="admin.php?#employee" class="btn btn-sm">View more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- monitor -->
       <div class="tab-pane fade" id="monitor"> </div>
       <div class="tab-pane fade" id="attendance">
-        <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex justify-content-between">
           <h3>Attendance List</h3>
         </div>
         <div id="attendance-list-table"></div> 
       </div>
       <div class="tab-pane fade" id="report">
-        <!-- <div id="report-table"></div>  -->
         <div class="d-flex justify-content-between mb-3">
-          <h3>Attendance Report</h3>
-           <form action="" method="POST" class="d-flex gap-2">
-            <input type="text" class="form-control" placeholder="Name or Employee ID" name="id_or_name">
-            <!-- <input type="text" class="form-control" placeholder="Status" name="status"> -->
-            <input type="month" class="form-control" name="date" value="2022-01">
-            <input type="submit" value="Filter" class="btn btn-success" name="filter" id="filter">
+          <h3>Create Attendance Report</h3>
+        </div>
+        <div class="container d-flex shadow-sm p-4 rounded" id="create-report">
+          <form action="json/filter.php" method="GET" class="">
+            <label for="id_or_name">Name or Employee ID</label>
+            <input type="text" class="form-control mb-3" name="id_or_name" id="id_or_name" autocomplete="off">
+            <label for="from">From</label>
+            <input type="date" class="form-control mb-3" name="from" id="from" required>
+            <label for="to">To</label>
+            <input type="date" class="form-control mb-3" name="to" id="to" required>
+            <input type="submit" value="Create" class="btn btn-success w-100" name="filter">
           </form>
         </div>
-        <div>
-          <?php
-
     
-          ?>
-        </div>
-        <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-success mb-5" id="export">Export</button>
-        </div>
       </div>
       <div class="tab-pane fade" id="schedule">
         <div class="">
@@ -648,7 +669,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Scan your Qr Code</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel"><i class="bi bi-qr-code-scan me-2"></i>Scan Qr Code</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  id="close"></button>
         </div>
         <div class="modal-body">
@@ -677,7 +698,7 @@
         <form action="add-employee.php" method="POST">
           <div class="modal-header">
             <h2 class="modal-title fs-5" id="staticBackdropLabel">
-              <i class="bi bi-person-add"></i>
+              <i class="bi bi-person-fill-add"></i>
               Add Employee
             </h2>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  id="close"></button>
@@ -736,7 +757,6 @@
   </div>
 
 
-<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <!-- JavaScript Bundle with Popper -->
@@ -745,5 +765,7 @@
 <script src="../js/bs-history/bs-history.js"></script>
 <script src="../js/fetch/employee.js"></script>
 <script src="../js/admin.js"></script>
+<script>
+</script>
 </body>
 </html>

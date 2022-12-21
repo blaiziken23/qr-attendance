@@ -11,7 +11,7 @@
 
     $result = mysqli_query($conn, "SELECT * FROM `admin_account` WHERE username = '$username' ");
     $row = mysqli_fetch_assoc($result);
-    
+
     if (mysqli_num_rows($result) > 0) {
       if (password_verify($password, $row['password'])) {
         $_SESSION["logged_in"] = true;
@@ -42,7 +42,7 @@
               Swal.fire({
                 icon: 'error',
                 title: 'Incorrect Credentials',
-                text: 'Please check your Username and Password',
+                html: 'Check Username and Password',
                 confirmButtonText: 'Try Again!',
               }).then((result) => {
                 if (result.isConfirmed) {
@@ -92,9 +92,8 @@
 <body>
 
 
-
   <div class="container">
-    <div class="row shadow rounded">
+    <div class="row shadow-sm rounded">
       <div class="col form-img">
         <img src="../img/images/login.svg" alt="">
       </div>
@@ -106,7 +105,7 @@
           <div class="d-flex justify-content-center ">
             <button type="submit" class="btn btn-success w-100" name="login" id="login">Log in</button>
           </div>
-          <div class="text-end py-3">
+          <div class="text-end pt-3">
             <a href="signup.php" class="btn btn-sm">Create Account? </a>
           </div>
         </form>

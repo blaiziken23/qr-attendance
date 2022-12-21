@@ -1,5 +1,6 @@
 body {
-  /* background: url('../img/images/bg2.svg') no-repeat; */
+  background: url('../img/images/form.svg') no-repeat;
+  background-position: center;
   background-size: cover;
   background-color: var(--white);
 }
@@ -10,7 +11,7 @@ body {
   align-items: center;
 }
 .row {
-  width: 650px;
+  width: 600px;
   height: auto;
   padding: 1rem;
 }

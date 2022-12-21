@@ -68,7 +68,7 @@ const scan = async () => {
     scanner.addListener("scan", (qrcode) => {
       value.value = qrcode;
       console.log(qrcode);
-      document.forms[1].submit();
+      document.forms[2].submit();
     });
 
   } 

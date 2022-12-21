@@ -16,7 +16,7 @@
               ON 
                 employee_information.information_id = employee_attendance.information_id
               WHERE 
-                employee_attendance.in_and_out = '0' OR employee_attendance.in_and_out = '1' AND employee_attendance.date = CURRENT_DATE";
+                employee_attendance.date = CURRENT_DATE AND (employee_attendance.in_and_out = '0' OR employee_attendance.in_and_out = '1')";
   
   $sql = mysqli_query($conn, $present) or die(mysqli_error());
   exit(json_encode(mysqli_fetch_all($sql, MYSQLI_ASSOC)));

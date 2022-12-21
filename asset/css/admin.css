@@ -35,7 +35,7 @@ video {
 }
 #dashboard .card .row .col-md-4 i.bi {
   color: var(--white);
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 #getday {
   font-size: .9rem;
@@ -48,7 +48,8 @@ section span i.bi {
   font-size: 2rem;
 }
 #add-employee {
-  background: var(--mustardyellow);
+  background: var(--armygreen);
+  color: var(--white);
 }
 .gridjs-container {
   width: auto !important;
@@ -61,5 +62,13 @@ section span i.bi {
 }
 
 .gridjs-table {
+  width: 100%;
+}
+#create-report {
+  display: flex;
+  justify-content: center;
+  width: 350px;
+}
+#create-report form {
   width: 100%;
 }

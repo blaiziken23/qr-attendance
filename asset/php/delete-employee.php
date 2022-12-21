@@ -17,7 +17,7 @@
             Swal.fire({
               icon: 'success',
               title: 'Deleted',
-              text: 'Successfully deleted',
+              text: 'Employee Deleted',
               timer: '1500',
               showConfirmButton: false,
               allowOutsideClick: false,
@@ -46,7 +46,7 @@
             Swal.fire({
               icon: 'success',
               title: 'Deleted',
-              text: 'Successfully deleted',
+              text: 'Employee Deleted',
               timer: '1500',
               showConfirmButton: false,
               allowOutsideClick: false,
@@ -68,10 +68,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Delete Employee</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

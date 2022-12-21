@@ -82,7 +82,6 @@
   <!-- css -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/form.css">
-
   <title>Signup</title>
 </head>
 <body>
@@ -90,7 +89,7 @@
 
 
   <div class="container">
-    <div class="row shadow rounded">
+    <div class="row shadow-sm rounded">
       <div class="col form-img">
         <img src="../img/images/signup.svg" alt="">
       </div>
@@ -108,7 +107,7 @@
           <div class="d-flex justify-content-center ">
             <button type="submit" class="btn btn-success w-100" name="sign-up" id="sign-up">Sign up</button>
           </div>
-          <div class="text-end py-3">
+          <div class="text-end pt-3">
             <a href="login.php" class="btn btn-sm">Login Account? </a>
           </div>
         </form>

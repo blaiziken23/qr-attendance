@@ -17,8 +17,6 @@
                 employee_information
               ON 
                 employee_information.information_id = employee_attendance.information_id
-              WHERE 
-                employee_attendance.date = CURRENT_DATE
               ORDER BY 
                 employee_attendance.attendance_id DESC";
 

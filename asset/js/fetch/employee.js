@@ -6,7 +6,6 @@ const api_fetch = async url => {
 //   console.log(d)
 // }
 // data();
- 
 
 const tbStyle = () => {
   let style = {
@@ -34,7 +33,7 @@ new gridjs.Grid({
   },
   sort: true,
   search: true,
-  columns: ['Emp.ID', 'Fullname', 'Department', 'Gender', 'Actions'],
+  columns: ['Employee ID', 'Fullname', 'Department', 'Gender', 'Actions'],
   server: {
     url: '/qr-attendance/asset/php/json/employee-list.php',
     then: data => data.map(info => [info.employee_id, `${info.firstname} ${info.lastname}`, info.department, info.gender, 
@@ -65,7 +64,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID','Name', 'Day', 'Time min', 'Time max'
+    'Employee ID','Name', 'Day', 'Time min', 'Time max'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/schedule.php',
@@ -88,7 +87,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID', 'Date', 'Name', 'Time in', 'Status'
+    'Employee ID', 'Date', 'Name', 'Time in', 'Status'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/present.php',
@@ -115,7 +114,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID', 'Date', 'Name', 'IN', 'OUT', 'Total Hour', 'Status'
+    'Employee ID', 'Date', 'Name', 'IN', 'OUT', 'Total Hour', 'Status'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/complete.php',
@@ -140,7 +139,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID', 'Date', 'Name', 'Time in', 'Status'
+    'Employee ID', 'Date', 'Name', 'Time in', 'Status'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/incomplete.php',
@@ -167,7 +166,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID', 'Date', 'Name', 'IN', 'Status'
+    'Employee ID', 'Date', 'Name', 'IN', 'Status'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/late.php',
@@ -192,7 +191,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID', 'Date', 'Name', 'IN', 'Status'
+    'Employee ID', 'Date', 'Name', 'IN', 'Status'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/ontime.php',
@@ -213,7 +212,7 @@ new gridjs.Grid({
     limit: 10
   },
   columns: [
-    'Emp ID', 'Date', 'Name', 'Status'
+    'Employee ID', 'Date', 'Name', 'Status'
   ],
   server: {
     url: '/qr-attendance/asset/php/json/absent.php',
@@ -232,7 +231,7 @@ new gridjs.Grid({
 
 
 
-// attendance list table
+// attendance-list table
 new gridjs.Grid({
   sort: true,
   search: true,
@@ -241,7 +240,18 @@ new gridjs.Grid({
   },
   fixedHeader: true,
   columns: [
-    'Emp ID', 'Date', 'Name', 'Time In', 'Time Out', 'Total Hour', 'Status'
+    'Employee ID', 'Date', 'Name', 'Time In', 'Time Out', 'Total Hour', {
+      name: 'Status',
+      attributes: (cell) => {
+        if (cell) {
+          return {
+            'className': 'gridjs-td-status gridjs-td'
+          }
+        }
+        
+      }
+      
+    }
   ],
   server: {
     url: '/qr-attendance/asset/php/json/attendance-list.php',
@@ -251,11 +261,15 @@ new gridjs.Grid({
 
 }).render(document.getElementById("attendance-list-table"));
 
-const attendance_list = async () => {
-  const d = await api_fetch("/qr-attendance/asset/php/json/attendance-list.php");
-  console.log(d);
-}
-attendance_list();
+// const attendance_list = async () => {
+//   const d = await api_fetch("/qr-attendance/asset/php/json/attendance-list.php");
+//   console.log(d);
+// }
+// attendance_list();
+
+
+
+
 
 
 // url auto show sub menu
@@ -296,24 +310,3 @@ setTimeout(() => {
     document.getElementById("sub-monitor").classList.remove("show");
   }
 }, 100);
-
-
-
-// export Excel
-function html_table_to_excel(type) {
-  var file = XLSX.utils.table_to_book(document.getElementById('attendance-list-table'), {
-    sheet: "sheet1"
-  });
-  XLSX.write(file, { 
-    bookType: type, 
-    bookSST: true, 
-    type: 'base64' 
-  });
-  XLSX.writeFile(file, 'file.' + type);
-}
-
-document.getElementById('export').addEventListener('click', () =>  {
-  html_table_to_excel('xlsx');
-});
-
-

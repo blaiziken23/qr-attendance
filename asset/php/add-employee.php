@@ -25,11 +25,9 @@
     $lastname = $_POST["lastname"];
     $department = $_POST["department"];
     $email = $_POST["email"];
-    // $number = $_POST["input-number"];
     $gender = $_POST["gender"];
     $password = randomPassword();
     $qrcode_value = password_hash($employee_id, PASSWORD_DEFAULT);
-    // $hashed_password = password_hash(randomPassword(), PASSWORD_DEFAULT);
 
     // $qrcode
     $path = "generated-qrcodes/";
@@ -63,8 +61,8 @@
     // Save QR code again, but with logo on it
     imagepng($QR, $qrcode);
 
-    $sql_info = "INSERT INTO `employee_information`(`employee_id`, `firstname`, `lastname`, `department`, `email`, `mobile_number`, `gender`, `qrcode`, `qrcode_value`, `password`) 
-                VALUES ('$employee_id', '$firstname', '$lastname', '$department', '$email', '$number', '$gender', '$qrcode', '$qrcode_value', '$password')";
+    $sql_info = "INSERT INTO `employee_information`(`employee_id`, `firstname`, `lastname`, `department`, `email`, `gender`, `qrcode`, `qrcode_value`, `password`) 
+                VALUES ('$employee_id', '$firstname', '$lastname', '$department', '$email', '$gender', '$qrcode', '$qrcode_value', '$password')";
 
     if (mysqli_query($conn, $sql_info)) {
       echo 
@@ -97,10 +95,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
